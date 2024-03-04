@@ -1,15 +1,10 @@
 #!/bin/bash
 
-# To generate a certificate, download and install certbot
-# Then run certbot certonly --standalone
-
-# This file is then placed in /c/Certbot/live after generating a certificate with it, or the linux equivalent.
-# Add this to the Task Scheduler to run roughly after certbot renew.
-
 # Find all directories in the current location
-for dir in */; do
-    dir=${dir%/}  # Remove trailing slash
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+cd $script_dir
 
+for dir in */; do
     # Check if the directory contains the required files
     if [ -f "$dir/privkey.pem" ] && [ -f "$dir/fullchain.pem" ]; then
         # Navigate into the directory
